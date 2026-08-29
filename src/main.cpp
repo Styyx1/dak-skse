@@ -1,5 +1,6 @@
 
 
+#include "SKSE/Interfaces.h"
 #include "SKSEMenuFramework.h"
 #include "sksemenu.h"
 float g_keyCache   = 0.0;
@@ -128,7 +129,6 @@ struct DAKInput : REX::TSingleton<DAKInput>, RE::BSTEventSink<RE::InputEvent*>
 
         if (g_cachedState != active)
         {
-            REX::INFO("Processing DAK Key");
             GLOB::SetDAKKey(active);
             g_cachedState = active;
             GLOB::UpdateHUD();
@@ -196,7 +196,6 @@ void Reg()
 }
 void __stdcall DAKMenu::Render()
 {
-    ImGuiMCP::Text("test");
     DrawHotkey();
 }
 void DAKMenu::DrawHotkey()
@@ -212,6 +211,7 @@ void DAKMenu::DrawHotkey()
         DAK::CONF::dak_key.SetValue(keys[selected]);
         DAK::CONF::Update(true);
         DAK::EVENT::DAKInput::SetKeys();
+        DAK::KeyHelper::Hotkeys::AdjustGlobalToKey();
     }
 }
 } // namespace DAK::UI
@@ -226,8 +226,14 @@ void List(SKSE::MessagingInterface::Message* a_msg)
         case SKSE::MessagingInterface::kDataLoaded:
             DAK::FORMS::LoadGlobals();
             DAK::EVENT::DAKInput::SetKeys();
+            DAK::KeyHelper::Hotkeys::AdjustGlobalToKey();
             DAK::UI::Reg();
             break;
+
+        case SKSE::MessagingInterface::kPostLoadGame:
+            DAK::KeyHelper::Hotkeys::AdjustGlobalToKey();
+            break;
+
         default:
             break;
     }
