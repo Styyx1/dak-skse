@@ -1,6 +1,6 @@
-name = "PLACEHOLDER"
-description = "PLACEHOLDER"
-modversion = "1.0.0"
+name = "DynamicActivationKey"
+description = "Press a key to enable alternative actions"
+modversion = "2.0.0"
 
 
 [configs]

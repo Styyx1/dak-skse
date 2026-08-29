@@ -1,9 +1,9 @@
 -- include subprojects
-includes("lib/commonlibsse", "extern/styyx-utils")
+includes("lib/commonlibsse", "extern/styyx-utils", "extern/clib-util")
 
-local MOD_NAME = "PlaceHolder"
-local MOD_VERSION = "0.0.0"
-local MOD_DESC = "PlaceHolder"
+local MOD_NAME = "DynamicActivationKey"
+local MOD_VERSION = "2.0.0"
+local MOD_DESC = "Press a key to enable alternative actions"
 
 -- set project constants
 set_project(MOD_NAME)
@@ -12,15 +12,17 @@ set_license("GPL-3.0")
 set_languages("c++23")
 set_warnings("allextra")
 
---{{ADDITIONAL CONFIGS}}--
+set_config("commonlib_toml", true)
+set_encodings("utf-8")
+
 
 -- add common rules
 add_rules("mode.debug", "mode.releasedbg")
-add_rules("plugin.vsxmake.autoupdate")
 
 -- define targets
 target(MOD_NAME)
     add_deps("styyx-util")
+    add_deps("clib-util")
     add_rules("commonlibsse.plugin", {
         name = MOD_NAME,
         author = "styyx",

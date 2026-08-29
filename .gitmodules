@@ -4,3 +4,7 @@
 [submodule "extern/styyx-utils"]
 	path = extern/styyx-utils
 	url = git@github.com:Styyx1/StyyxUtils.git
+	branch = xse
+[submodule "extern/clib-util"]
+	path = extern/clib-util
+	url = git@github.com:Styyx1/CLibUtil.git
